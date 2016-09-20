@@ -128,13 +128,8 @@ public class AListTest extends TestCase {
     l.add("Conditioner");
     l.add("ConditionerSunsilk");
     
+    assertEquals("added an item at the start, the next item should remain", "ConditionerSunsilk", l.get(10));
     
-     try {
-       l.add("Junk Food");
-      fail("Should have thrown an exception!");
-    } catch (IndexOutOfBoundsException e) {  
-    //nothing
-    }
      
   }
   
