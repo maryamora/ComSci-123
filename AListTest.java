@@ -8,16 +8,20 @@ import junit.framework.TestCase;
  * the test with JUnit.
  */
 public class AListTest extends TestCase {
+  private MyList l;
   
+  public void setUp(){
+    l = new AList();
+  }
   
   public void testAddOne() {
-    AList l = new AList();
+    
     l.add("Shampoo");
     assertEquals("added one item", "Shampoo", l.get(0));
   }
   
   public void testAddTwo() {
-    AList l = new AList();
+    MyList l = new AList();
     l.add("Shampoo");
     l.add("Soap");
     assertEquals("added two items and first was Shampoo", "Shampoo", l.get(0));
@@ -25,7 +29,7 @@ public class AListTest extends TestCase {
   }
   
   public void testAddBetween() {
-    AList l = new AList();
+    MyList l = new AList();
     l.add("Shampoo");
     l.add("Soap");
     l.add(1, "Deodorant");
@@ -35,7 +39,7 @@ public class AListTest extends TestCase {
   }
   
   public void testGetOutOfBoundsWhenEmpty() {
-    AList l = new AList();
+    MyList l = new AList();
     try {
       l.get(0);
       fail("Should have thrown an exception!");
@@ -46,7 +50,7 @@ public class AListTest extends TestCase {
   
   
   public void testGetOutOfBounds() {
-    AList l = new AList();
+    MyList l = new AList();
     l.add("Shampoo");
     try {
       l.get(1);
@@ -57,7 +61,7 @@ public class AListTest extends TestCase {
   }
   
   public void testRemoveLast() {
-    AList l = new AList();
+    MyList l = new AList();
     l.add("Shampoo");
     l.add("Deodorant");
     l.add("Soap");
@@ -73,7 +77,7 @@ public class AListTest extends TestCase {
   
   
   public void testRemoveMid() {
-    AList l = new AList();
+    MyList l = new AList();
     l.add("Shampoo");
     l.add("Deodorant");
     l.add("Soap");
@@ -89,14 +93,14 @@ public class AListTest extends TestCase {
   
   
   public void testSet() {
-    AList l = new AList();
+    MyList l = new AList();
     l.add("Shampoo");
     l.set(0, "Deodorant");
     assertEquals("added two items and first was Deodorant", "Deodorant", l.get(0));
   }
 
   public void testAddStart() {
-    AList l = new AList();
+    MyList l = new AList();
     l.add("Shampoo");
     l.add("Soap");
     l.add(0, "Noodles");
@@ -107,7 +111,7 @@ public class AListTest extends TestCase {
   
   
     public void testAddEnd() {
-    AList l = new AList();
+    MyList l = new AList();
     l.add("Shampoo");
     l.add("Soap");
     l.add(2, "Noodles");
@@ -115,7 +119,7 @@ public class AListTest extends TestCase {
   }
   
   public void testAddOffEnd() {
-    AList l = new AList();
+    MyList l = new AList();
     l.add("Shampoo");
     l.add("Soap");
     l.add("Noodles");
@@ -134,7 +138,7 @@ public class AListTest extends TestCase {
   }
   
   public void testRemoveString() {
-    AList l = new AList();
+    MyList l = new AList();
     l.add("Shampoo");
     l.add("Deodorant");
     l.add("Soap");

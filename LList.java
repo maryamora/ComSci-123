@@ -1,12 +1,14 @@
 //Created by: Mary Danielle Amora and Danielle Hernandez
+//This code is based on our previous code --> AList.java
+
 import java.util.*;
   
-public class AList implements MyList{
+public class LList implements MyList{
   private String[] items;
   private int count;
   private int size = 10;
   
-  public AList() {
+  public LList() {
     items = new String[size];
     count = 0;
   }
@@ -20,9 +22,7 @@ public class AList implements MyList{
   
   public void add(String item) {
     items[count++] = item;
-    //if(count >= size){
       increase();
-    //}
   }
   public void add(int i, String item) {
     if(i <= count){
