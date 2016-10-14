@@ -3,6 +3,7 @@ import java.util.*;
 public class LList<E> implements MyList<E>{
   private int size;
   private MyNode head;
+  private MyNode tail;
   
   public LList(){
     MyNode head = new MyNode();
@@ -16,6 +17,7 @@ public class LList<E> implements MyList<E>{
   public void add(E element){
     if(head == null){
       head = new MyNode((String)element);
+      tail = head;
       size++;
     } else {
       add(size, element);
@@ -43,15 +45,17 @@ public class LList<E> implements MyList<E>{
     }
     //add last
     else if (i == size){
-      MyNode current = head;
+      //MyNode current = head;
       MyNode newNode = new MyNode((String)item);
-      while(true){
+      /*while(true){
         if (current.getNext() == null){
           break;
         }
         current = current.getNext();
       }
-      current.setNext(newNode);
+      current.setNext(newNode);*/
+      tail.setNext(newNode);
+      tail = tail.getNext();
     }
     //middle
     else{
@@ -84,7 +88,10 @@ public class LList<E> implements MyList<E>{
     }
   }
   public E get(int i){
-    if (i >= size){
+    if (i == size-1){
+      return ((E)toString(tail));
+    }
+    else if (i >= size){
       throw new ArrayIndexOutOfBoundsException("Invalid");
     }
     if (checking(i) == true){  
@@ -123,7 +130,7 @@ public class LList<E> implements MyList<E>{
   public void remove(int i){
     if (i > size){
       throw new ArrayIndexOutOfBoundsException("Invalid");
-    }
+    } 
     if (i < size){
     //start and empty
      }  
@@ -161,32 +168,33 @@ public class LList<E> implements MyList<E>{
   //MyNode Class below
   
   public class MyNode {
+    private MyNode next;
+    private String element;
   
-  private MyNode next;
-  private String element;
-  
-  public MyNode(){
-    //null
-  }
-  public MyNode (String element){
-    this.element = element;
-  }
     
-  public MyNode getNext(){
-    return next;
+    public MyNode(){
+      //null
+    }
+    public MyNode (String element){
+      this.element = element;
+    }
+    
+    public MyNode getNext(){
+      return next;
+    }
+    
+    public void setNext(MyNode node){
+      this.next = node;
+    }
+    
+    public String getElement(){
+      return element;
+    }
+    
+    public void setElement(String element){
+      this.element = element;
+    }
   }
-  public void setNext(MyNode node){
-    this.next = node;
-  }
-  
-  public String getElement(){
-    return element;
-  }
-  
-  public void setElement(String element){
-    this.element = element;
-  }
-}
   
 //Iterator Here
   public Iterator<E> iterator() {
