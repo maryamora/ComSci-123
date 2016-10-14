@@ -85,4 +85,13 @@ public class LListTest extends TestCase {
 
  }
 
+ public void testAddEndUsingTail(){
+   LList<String> list = new LList<String>();
+   list.add("Y");
+   list.add("R");
+   
+   assertEquals("Added Y","Y", list.get(0));
+   assertEquals("Added R","R", list.get(1));
+ }
+ 
 }
