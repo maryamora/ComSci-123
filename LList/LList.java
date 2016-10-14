@@ -1,6 +1,6 @@
 //Danielle Hernandez && Mary Danielle Amora
 import java.util.*;
-public class LList implements MyList{
+public class LList<E> implements MyList<E>{
   private int size;
   private MyNode head;
   
@@ -9,7 +9,11 @@ public class LList implements MyList{
     size = 0;
   }
   
-  public void add(Object element){
+  public int size(){
+    return size;
+  }
+  
+  public void add(E element){
     if(head == null){
       head = new MyNode((String)element);
       size++;
@@ -25,7 +29,7 @@ public class LList implements MyList{
     return true;
   }
   
-  public void add(int i, Object item){
+  public void add(int i, E item){
     if (checking(i) == true){
     //start and empty
     if (i == 0 && size == 0){
@@ -65,7 +69,7 @@ public class LList implements MyList{
     size++;
     }
   }
-  public void set(int i, Object item){
+  public void set(int i, E item){
     if (checking(i) == true){
     
     MyNode current = head;
@@ -79,7 +83,7 @@ public class LList implements MyList{
       }
     }
   }
-  public String get(int i){
+  public E get(int i){
     if (i >= size){
       throw new ArrayIndexOutOfBoundsException("Invalid");
     }
@@ -87,19 +91,19 @@ public class LList implements MyList{
     
     MyNode current = head;
       if (i == 0){
-        return toString(head);
+        return ((E)toString(head));
       }
       else{
         for (int j = 0; j < i; j++){
         current = current.getNext();
         }
       }
-    return toString(current);
+    return ((E)toString(current));
     }
-    return "";
+    return (E)"";
   }
   
-   public void remove(Object item){
+   public void remove(E item){
     MyNode current = head;
     boolean value;
     int ct = 0;
@@ -185,36 +189,35 @@ public class LList implements MyList{
 }
   
 //Iterator Here
-  public Iterator iterator() {
+  public Iterator<E> iterator() {
     return new LListIterator(head);
   }
 
   private class LListIterator implements Iterator {
     
     private MyNode current;
+    private MyNode temp;
     private MyNode prev;
     private MyNode next;
-    private String element;
     
     public LListIterator(MyNode head) {
-      
-      prev = null;
-      current = null;
       next = head;
+      current = null;
+      prev = null;
     }
     
     public Object next() {
-     
-      if (current == null){
-        element = next.getElement();
+      if (next == null) {
+        throw new NoSuchElementException();
+      } 
+      Object element = next.getElement();
+      if(current == null){
         current = next;
-        next = current.getNext();
-      }
-      else{
-        element = next.getElement();
+        next = next.getNext();
+      } else { 
         prev = current;
         current = next;
-        next = current.getNext();
+        next = next.getNext();
       }
       return element;
     }
@@ -224,17 +227,19 @@ public class LList implements MyList{
     }
     
     public void remove(){
-      if (current == null){
+     if(current == null){
         throw new IllegalStateException();
       }
-      else if (prev == null){
-        head = next;
+      
+      if(prev == null){
+        head = current.getNext();
         current = null;
-      }
-      else{
-        current = null;
-        prev.setNext(next);
-      }
+        next = head;
+        
+      } else {
+            current = null; 
+            prev.setNext(next);
+         }
     }
   }
 } 
